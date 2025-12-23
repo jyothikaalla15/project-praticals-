@@ -16,11 +16,16 @@ pipeline {
         }
 
         stage('Build React') {
-            steps {
-                sh 'chmod +x build.sh'
-                sh './build.sh'
-            }
-        }
+    steps {
+        sh '''
+            node -v
+            npm -v
+            npm install
+            npm run build
+        '''
+    }
+}
+
 
         stage('Deploy to S3 & Invalidate CloudFront') {
             steps {
@@ -28,7 +33,7 @@ pipeline {
                     sh '''
                       aws s3 sync build/ s3://${S3_BUCKET} --delete
                       aws cloudfront create-invalidation \
-                        --distribution-id E1QEK1LS9J2AK1\
+                        --distribution-id  E1QEK1LS9J2AK1\
                         --paths "/*"
                     '''
                 }

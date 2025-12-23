@@ -1,7 +1,7 @@
 pipeline {
     agent any
  tools {
-        nodejs 'Node18'
+        nodejs 'Node25.1'
     }
     environment {
         PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"

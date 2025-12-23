@@ -15,7 +15,6 @@ pipeline {
                     url: 'https://github.com/jyothikaalla15/project-praticals-.git'
             }
         }
-    }
         stages {
         stage('Verify Node') {
             steps {
@@ -27,6 +26,7 @@ pipeline {
                     npm -v
                 '''
             }
+        }
         }
         stage('Deploy to S3 & Invalidate CloudFront') {
             steps {

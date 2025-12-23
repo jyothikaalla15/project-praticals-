@@ -16,11 +16,13 @@ pipeline {
         }
 
         stage('Build React') {
-            steps {
-                sh 'chmod +x build.sh'
-                sh './build.sh'
-            }
-        }
+    steps {
+        sh '''
+            npm install
+            npm run build
+        '''
+    }
+}
 
         stage('Deploy to S3 & Invalidate CloudFront') {
             steps {

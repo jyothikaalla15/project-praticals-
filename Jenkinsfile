@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        nodejs 'node18'
+    }
 
     environment {
         AWS_DEFAULT_REGION = 'us-east-1'
@@ -16,13 +19,15 @@ pipeline {
         }
 
         stage('Build React') {
-    steps {
-        sh '''
-            npm install
-            npm run build
-        '''
-    }
-}
+            steps {
+                sh '''
+                    node -v
+                    npm -v
+                    npm install
+                    npm run build
+                '''
+            }
+        }
 
         stage('Deploy to S3 & Invalidate CloudFront') {
             steps {

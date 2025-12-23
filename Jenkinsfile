@@ -1,6 +1,5 @@
 pipeline {
     agent any
-  
 
     environment {
         AWS_DEFAULT_REGION = 'us-east-1'
@@ -18,12 +17,8 @@ pipeline {
 
         stage('Build React') {
             steps {
-                sh '''
-                    node -v
-                    npm -v
-                    npm install
-                    npm run build
-                '''
+                sh 'chmod +x build.sh'
+                sh './build.sh'
             }
         }
 
@@ -33,7 +28,7 @@ pipeline {
                     sh '''
                       aws s3 sync build/ s3://${S3_BUCKET} --delete
                       aws cloudfront create-invalidation \
-                        --distribution-id E1QEK1LS9J2AK1 \
+                        --distribution-id E1QEK1LS9J2AK1\
                         --paths "/*"
                     '''
                 }

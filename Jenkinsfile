@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     environment {
+        PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
         AWS_DEFAULT_REGION = 'us-east-1'
         S3_BUCKET = 'amzn-nextgen'
     }
@@ -15,7 +16,7 @@ pipeline {
             }
         }
 
-        stage('Build React') {
+        stage('Verify Node') {
             steps {
                  sh '''
             node -v
@@ -23,6 +24,14 @@ pipeline {
             npm install
             npm run build
         '''
+            }
+        }
+        stage('Build React') {
+            steps {
+                sh '''
+                    npm install
+                    npm run build
+                '''
             }
         }
 

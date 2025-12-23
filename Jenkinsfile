@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+ tools {
+        nodejs 'Node18'
+    }
     environment {
         PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
         AWS_DEFAULT_REGION = 'us-east-1'

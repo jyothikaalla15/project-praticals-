@@ -11,7 +11,7 @@ ipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/jyothikaalla15/project-praticals-.git''
+                    url: 'https://github.com/jyothikaalla15/project-praticals-.git'
             }
         }
 

@@ -15,7 +15,7 @@ pipeline {
                     url: 'https://github.com/jyothikaalla15/project-praticals-.git'
             }
         }
-
+    }
         stages {
         stage('Verify Node') {
             steps {
@@ -42,4 +42,4 @@ pipeline {
         }
     }
 }
-}
+

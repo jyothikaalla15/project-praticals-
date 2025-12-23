@@ -17,8 +17,12 @@ pipeline {
 
         stage('Build React') {
             steps {
-                sh 'chmod +x build.sh'
-                sh './build.sh'
+                 sh '''
+            node -v
+            npm -v
+            npm install
+            npm run build
+        '''
             }
         }
 

@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    tools {
-        nodejs 'node18'
-    }
+  
 
     environment {
         AWS_DEFAULT_REGION = 'us-east-1'

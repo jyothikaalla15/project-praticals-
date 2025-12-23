@@ -15,18 +15,17 @@ pipeline {
             }
         }
 
-        stage('Build React') {
+        stage('Verify Node') {
     steps {
         sh '''
+            echo $PATH
+            which node
             node -v
+            which npm
             npm -v
-            npm install
-            npm run build
         '''
     }
 }
-
-
         stage('Deploy to S3 & Invalidate CloudFront') {
             steps {
                 withAWS(credentials: 'aws-credentials', region: 'us-east-1') {

@@ -1,7 +1,8 @@
 pipeline {
     agent any
-
+  
     environment {
+         PATH = "/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin"
         AWS_DEFAULT_REGION = 'us-east-1'
         S3_BUCKET = 'amzn-nextgen'
     }
@@ -15,17 +16,18 @@ pipeline {
             }
         }
 
+        stages {
         stage('Verify Node') {
-    steps {
-        sh '''
-            echo $PATH
-            which node
-            node -v
-            which npm
-            npm -v
-        '''
-    }
-}
+            steps {
+                sh '''
+                    echo "PATH=$PATH"
+                    which node
+                    node -v
+                    which npm
+                    npm -v
+                '''
+            }
+        }
         stage('Deploy to S3 & Invalidate CloudFront') {
             steps {
                 withAWS(credentials: 'aws-credentials', region: 'us-east-1') {

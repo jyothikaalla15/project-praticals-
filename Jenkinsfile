@@ -18,22 +18,19 @@ pipeline {
             }
         }
 
-        stage('Verify Node') {
-            steps {
-                sh '''
-                  node -v
-                  npm -v
-                '''
-            }
-        }
+       stage('Verify Node') {
+    steps {
+        sh 'node -v'
+        sh 'npm -v'
+        sh 'ls -R' // This will show every file and folder in the workspace
+    }
+}
 
        stage('Build React') {
     steps {
-        // Change 'frontend' to the actual name of your subfolder
-        dir('frontend') { 
-            sh 'npm install'
-            sh 'npm run build'
-        }
+        // Remove dir('frontend') if package.json is in the root
+        sh 'npm install'
+        sh 'npm run build'
     }
 }
 

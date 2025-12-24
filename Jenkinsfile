@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        nodejs 'node20' // This must match the name you gave it in Global Tool Configuration
+    }
 
     environment {
         AWS_DEFAULT_REGION = 'us-east-1'

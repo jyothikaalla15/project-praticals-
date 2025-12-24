@@ -27,14 +27,12 @@ pipeline {
             }
         }
 
-        stage('Build React') {
-            steps {
-                sh '''
-                  npm install
-                  npm run build
-                '''
-            }
-        }
+       stage('Build React') {
+    steps {
+        sh 'cd frontend && npm install'
+        sh 'cd frontend && npm run build'
+    }
+}
 
         stage('Deploy to S3 & Invalidate CloudFront') {
             steps {

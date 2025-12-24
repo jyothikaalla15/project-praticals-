@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    tools {
-        nodejs 'node20' // This must match the name you gave it in Global Tool Configuration
-    }
+    
 
     environment {
         AWS_DEFAULT_REGION = 'us-east-1'
@@ -18,24 +16,11 @@ pipeline {
                     url: 'https://github.com/jyothikaalla15/project-praticals-.git',
             }
         }
-
-        stage('Verify Node') {
-            steps {
-                sh '''
-                  node -v
-                  npm -v
-                '''
-            }
-        }
-
+        
         stage('Build React') {
             steps {
-                dir('frontend') {
-                    sh '''
-                      npm install
-                      npm run build
-                    '''
-                }
+                sh 'chmod +x build.sh'
+                sh './build.sh'
             }
         }
 

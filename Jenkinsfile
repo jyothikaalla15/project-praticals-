@@ -1,6 +1,5 @@
 pipeline {
     agent any
-    
 
     environment {
         AWS_DEFAULT_REGION = 'us-east-1'
@@ -11,11 +10,11 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                checkout scm
                 git branch: 'main',
-                    url: 'https://github.com/jyothikaalla15/project-praticals-.git' 
+                    url: 'https://github.com/jyothikaalla15/project-praticals-.git'
+            }
         }
-        
+
         stage('Build React') {
             steps {
                 sh 'chmod +x build.sh'
@@ -36,5 +35,4 @@ pipeline {
             }
         }
     }
-}
 }

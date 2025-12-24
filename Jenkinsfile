@@ -29,8 +29,11 @@ pipeline {
 
        stage('Build React') {
     steps {
-        sh 'cd frontend && npm install'
-        sh 'cd frontend && npm run build'
+        // Change 'frontend' to the actual name of your subfolder
+        dir('frontend') { 
+            sh 'npm install'
+            sh 'npm run build'
+        }
     }
 }
 

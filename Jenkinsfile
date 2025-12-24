@@ -13,26 +13,31 @@ pipeline {
 
         stage('Checkout') {
             steps {
+                checkout scm
                 git branch: 'main',
                     url: 'https://github.com/jyothikaalla15/project-praticals-.git'
             }
         }
 
-       stage('Verify Node') {
-    steps {
-        sh 'node -v'
-        sh 'npm -v'
-        sh 'ls -R' // This will show every file and folder in the workspace
-    }
-}
+        stage('Verify Node') {
+            steps {
+                sh '''
+                  node -v
+                  npm -v
+                '''
+            }
+        }
 
-       stage('Build React') {
-    steps {
-        // Remove dir('frontend') if package.json is in the root
-        sh 'npm install'
-        sh 'npm run build'
-    }
-}
+        stage('Build React') {
+            steps {
+                dir('frontend') {
+                    sh '''
+                      npm install
+                      npm run build
+                    '''
+                }
+            }
+        }
 
         stage('Deploy to S3 & Invalidate CloudFront') {
             steps {

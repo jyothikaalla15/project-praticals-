@@ -13,9 +13,7 @@ pipeline {
             steps {
                 checkout scm
                 git branch: 'main',
-                    url: 'https://github.com/jyothikaalla15/project-praticals-.git',
-                    credentialsId: 'aws-credentials'
-            }
+                    url: 'https://github.com/jyothikaalla15/project-praticals-.git' 
         }
         
         stage('Build React') {
